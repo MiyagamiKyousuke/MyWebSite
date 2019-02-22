@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.usertable{
+	margin-top: 20px;
+}
+
+.usertable th{
+	text-align:center
+}

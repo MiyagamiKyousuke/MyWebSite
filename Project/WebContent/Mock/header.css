@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.bg-yellow {
+	background: #FCFF00;
+}
+
+.shoplink a {
+	font-weight: bold;
+	color: #3F3333;
+	text-decoration: none;
+	text-align: center;
+}
+
+.shoplink {
+	margin-bottom: 0;
+}
+
+.green {
+	color: #090;
+}
+
+.shoplink li {
+	display: inline-block;
+	padding: 1ex;
+	margin: 0 auto;
+
+
+}
+.bg-yellow{
+	width: 100%;
+}
+li:hover {
+    background-color: lightgray;
+}
+
+li:hover {
+    font-weight: bold;
+}
+

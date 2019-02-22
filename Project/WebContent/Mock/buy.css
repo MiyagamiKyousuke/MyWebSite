@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.center {
+	text-align: center;
+}
+.table{
+	margin-bottom: 0rem;
+}
+
+.card table{
+	margin-bottom: 0rem;
+}
+.aaa table td{
+	margin-left:90px
+	background-color: red;
+}
