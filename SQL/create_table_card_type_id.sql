@@ -1,0 +1,4 @@
+CREATE TABLE card_type_id(id SERIAL PRIMARY KEY, type INT NOT NULL); 
+
+
+

@@ -15,7 +15,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -30,7 +30,23 @@
 				<div class="col text-center">
 					<form action="ItemSearchResult">
 						<div class="input-group-prepend">
-							<span class="input-group-text"> <i class="fas fa-search"></i></span>
+							<div class="dropdown">
+								<!-- 切替ボタンの設定 -->
+								<!--
+								<button type="button" class="btn btn-secondary dropdown-toggle"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false" style="width: 10em;">
+									<span class=""> <i class="fas fa-search">すべて</i></span>
+								</button>
+
+								<!-- ドロップメニューの設定 -->
+								<select name="cardType" class="btn ">
+								<option value="all">すべて</option>
+								<option value="monster">モンスター</option>
+								<option value="magic">魔法</option>
+								<option value="trap">トラップ</option>
+								</select>
+							</div>
 							<input type="text" class="form-control" name="search_word">
 						</div>
 					</form>
@@ -56,19 +72,22 @@
 					</tr>
 					<tr>
 						<th scope="col">1位</th>
-						<th scope="col"><a href="itemDetail.jsp" class="text-center"><img class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
+						<th scope="col"><a href="itemDetail.jsp" class="text-center"><img
+								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
 						<th scope="col">灰流うらら</th>
 						<th scope="col">1000円</th>
 					</tr>
 					<tr>
 						<th scope="col">2位</th>
-						<th scope="col"><a href="#" class="text-center"><img class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
+						<th scope="col"><a href="#" class="text-center"><img
+								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
 						<th scope="col">灰流うらら</th>
 						<th scope="col">1000円</th>
 					</tr>
 					<tr>
 						<th scope="col">3位</th>
-						<th scope="col"><a href="#" class="text-center"><img class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
+						<th scope="col"><a href="#" class="text-center"><img
+								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
 						<th scope="col">灰流うらら</th>
 						<th scope="col">1000円</th>
 					</tr>
