@@ -3,7 +3,4 @@ CREATE TABLE buy_detail(
   , buy_id INT NOT NULL
   , item_id INT NOT NULL
   , num INT NOT NULL
-); 
-
-
-
+);

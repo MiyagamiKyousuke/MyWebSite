@@ -1,7 +1,6 @@
 package yu;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import beans.ItemBeans;
 import dao.ItemDAO;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class ItemDetail
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/ItemDetail")
+public class ItemDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Index() {
+	public ItemDetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,38 +35,17 @@ public class Index extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			//ランキング情報を取得
-			ArrayList<ItemBeans> itemList = ItemDAO.getRankingItem(3);
+			//選択された商品のIDを型変換し利用
+			int id = Integer.parseInt(request.getParameter("item_id"));
 
+			//対象のアイテム情報を取得
+			ItemBeans item = ItemDAO.itemDetailPrint(id);
 
-			//順位を設定
-			int continueNum = 1;
-			for(int i = 0; i < itemList.size(); i++) {
-				ItemBeans item = itemList.get(i);
-				int previous = i > 0 ? itemList.get(i -1).getRanking() : 0;
-				int previousNum = i > 0 ? itemList.get(i -1).getNum() : 0;
-				if(i > 0 && previousNum == item.getNum()) {
-					item.setRanking(previous);
-					continueNum++;
-				} else {
-					item.setRanking(previous + continueNum);
-					continueNum = 1;
-				}
-
-			}
-
-
-			//リクエストスコープにセット
-			request.setAttribute("itemList", itemList);
-
-			//セッションにsearchWordが入っていたら破棄する
-			String searchWord = (String) session.getAttribute("searchWord");
-			if (searchWord != null) {
-				session.removeAttribute("searchWord");
-			}
+			//リクエストパラメーターにセット
+			request.setAttribute("item", item);
 
 			//フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemDetail.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

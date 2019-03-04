@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +29,7 @@
 			</div>
 			<div class="row center">
 				<div class="col text-center">
-					<form action="ItemSearchResult">
+					<form action="ItemSearchResult" method="post">
 						<div class="input-group-prepend">
 							<div class="dropdown">
 								<!-- 切替ボタンの設定 -->
@@ -41,10 +42,10 @@
 
 								<!-- ドロップメニューの設定 -->
 								<select name="cardType" class="btn ">
-								<option value="all">すべて</option>
-								<option value="monster">モンスター</option>
-								<option value="magic">魔法</option>
-								<option value="trap">トラップ</option>
+								<option value="0">すべて</option>
+								<option value="1">モンスター</option>
+								<option value="2">魔法</option>
+								<option value="3">トラップ</option>
 								</select>
 							</div>
 							<input type="text" class="form-control" name="search_word">
@@ -70,27 +71,16 @@
 						<th scope="col">商品名</th>
 						<th scope="col">値段</th>
 					</tr>
-					<tr>
-						<th scope="col">1位</th>
-						<th scope="col"><a href="itemDetail.jsp" class="text-center"><img
-								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
-						<th scope="col">灰流うらら</th>
-						<th scope="col">1000円</th>
+					<c:forEach var="item" items="${itemList}">
+						<tr>
+						<th scope="col">${item.ranking}位</th>
+						<th scope="col"><a href="ItemDetail?item_id=${item.id}" class="text-center"><img
+								class="cardRanking" src="image/${item.fileName}"></a></th>
+						<th scope="col">${item.itemName}</th>
+						<th scope="col">${item.price}円</th>
 					</tr>
-					<tr>
-						<th scope="col">2位</th>
-						<th scope="col"><a href="#" class="text-center"><img
-								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
-						<th scope="col">灰流うらら</th>
-						<th scope="col">1000円</th>
-					</tr>
-					<tr>
-						<th scope="col">3位</th>
-						<th scope="col"><a href="#" class="text-center"><img
-								class="cardRanking" src="image/51P7MQPmqLL.jpg"></a></th>
-						<th scope="col">灰流うらら</th>
-						<th scope="col">1000円</th>
-					</tr>
+
+					</c:forEach>
 				</table>
 
 

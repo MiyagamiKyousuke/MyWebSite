@@ -33,13 +33,13 @@ public class UserDAO {
 
 			ResultSet rs = ps.executeQuery();
 
-			int userId = 0;
+			int itemId = 0;
 
 			if (!rs.next()) {
 
 			}
-			userId = rs.getInt("id");
-			return userId;
+			itemId = rs.getInt("id");
+			return itemId;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

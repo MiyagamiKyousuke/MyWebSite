@@ -6,6 +6,3 @@ CREATE TABLE item(
   , price INT NOT NULL
   , file_name VARCHAR (200) NOT NULL
 );
-
-
-

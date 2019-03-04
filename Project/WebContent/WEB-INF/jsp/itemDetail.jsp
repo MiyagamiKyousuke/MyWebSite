@@ -44,18 +44,15 @@
 			<div class="row">
 				<div class="col">
 					<div class="card-image">
-						<img src="image/51P7MQPmqLL.jpg">
+						<img src="image/${item.fileName}">
 					</div>
 				</div>
 				<div class="col">
 					<div class="ca">
-						<h4>灰流うらら</h4>
+						<h4>${item.itemName}</h4>
 					</div>
-					<h5>1000円</h5>
-					<p>チューナー・効果モンスター（準制限カード） 星３/炎属性/アンデット族/攻 0/守1800
-						このカード名の効果は１ターンに１度しか使用できない。 (1)：以下のいずれかの効果を含む魔法・罠・モンスターの効果が発動した時、
-						このカードを手札から捨てて発動できる。 その効果を無効にする。 ●デッキからカードを手札に加える効果
-						●デッキからモンスターを特殊召喚する効果 ●デッキからカードを墓地へ送る効果</p>
+					<h5>${item.price}円</h5>
+					<p>${item.effect}</p>
 				</div>
 			</div>
 		</div>
