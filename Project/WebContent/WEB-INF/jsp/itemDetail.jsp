@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,39 +23,61 @@
 <link rel="stylesheet" href="itemDetail.css">
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br> <br>
-			<div class="row center">
-				<div class="col"></div>
-				<div class="col">
-					<h5 class=" col light">商品詳細</h5>
-				</div>
-				<div class="col">
-					<form action="ItemAdd" method="POST">
+			<form action="ItemAdd" method="POST">
+				<div class="row center">
+					<div class="col"></div>
+					<div class="col">
+						<h5 class=" col light">商品詳細</h5>
+					</div>
+					<div class="col">
+
 						<input type="hidden" name="item_id" value="${item.id}">
-						<button type="button" class="btn btn-primary ">
+						<button type="submit" class="btn btn-primary ">
 							買い物かごに追加 <i class="fas fa-cart-plus"></i>
 						</button>
-					</form>
-				</div>
-			</div>
-			<br> <br>
-			<div class="row">
-				<div class="col">
-					<div class="card-image">
-						<img src="image/${item.fileName}">
+
 					</div>
 				</div>
-				<div class="col">
-					<div class="ca">
-						<h4>${item.itemName}</h4>
+				<br> <br>
+				<div class="row">
+					<div class="col-5">
+						<div class="card-image">
+							<img src="image/${item.fileName}">
+						</div>
 					</div>
-					<h5>${item.price}円</h5>
-					<p>${item.effect}</p>
+					<div class="col-5">
+						<div class="ca">
+							<h4>${item.itemName}</h4>
+						</div>
+						<h5>${item.price}円</h5>
+						<p>${item.effect}</p>
+					</div>
+					<!--  <div class="row">-->
+					<div class="col-2">
+						<p>購入数</p>
+						<div class="dropdown">
+							<!-- 切替ボタンの設定 -->
+							<!--
+								<button type="button" class="btn btn-secondary dropdown-toggle"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false" style="width: 10em;">
+									<span class=""> <i class="fas fa-search">すべて</i></span>
+								</button>
+
+								<!-- ドロップメニューの設定 -->
+							<select name="numAdd" class="btn ">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 
 	</div>

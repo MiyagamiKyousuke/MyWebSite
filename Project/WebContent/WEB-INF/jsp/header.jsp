@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html">
 <html>
 <head>
@@ -21,22 +22,36 @@
 			<div class="container">
 				<div class="mx-auto">
 					<ul
+						<%boolean isLogin = session.getAttribute("isLogin") != null ? (boolean) session.getAttribute("isLogin")
+					: false;%>
 						class="shoplink clearfix hidden-xs hidden-sm visible-md visible-lg text-center">
-						<li><a href="index.jsp"> <i class="fas fa-caret-right green"
+						<li><a href="Index"> <i class="fas fa-caret-right green"
 								aria-hidden="true"> </i> HOME
 						</a></li>
-						<li><a href="#"> <i class="fas fa-caret-right green"
-								aria-hidden="true"> </i> 検索
+						<li><a href="ItemSearch"> <i
+								class="fas fa-caret-right green" aria-hidden="true"> </i> 検索
 						</a></li>
-						<li><a href="userCreates.jsp"> <i class="fas fa-caret-right green"
-								aria-hidden="true"> </i> 新規登録
+						<%if(isLogin){ %>
+						<li><a href="UserData"> <i
+								class="fas fa-caret-right green" aria-hidden="true"> </i> ユーザー情報
 						</a></li>
+						<%}else{ %>
+						<li><a href="Regist"> <i
+								class="fas fa-caret-right green" aria-hidden="true"> </i> 新規登録
+						</a></li>
+						<%} %>
 						<li><a href="#"> <i class="fas fa-caret-right green"
 								aria-hidden="true"> </i> MAP
 						</a></li>
-						<li><a href="login.jsp"> <i class="fas fa-caret-right green"
-								aria-hidden="true"> </i> LOGIN
+						<%if(isLogin){ %>
+						<li><a href="Logout"> <i
+								class="fas fa-caret-right green" aria-hidden="true"> </i> LOGOUT
 						</a></li>
+						<%}else{ %>
+						<li><a href="LoginUser"> <i
+								class="fas fa-caret-right green" aria-hidden="true"> </i> LOGIN
+						</a></li>
+						<%} %>
 
 					</ul>
 				</div>

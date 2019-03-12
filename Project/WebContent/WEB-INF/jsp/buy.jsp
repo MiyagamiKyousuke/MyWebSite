@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,33 +30,38 @@
 		<div class="row center">
 			<h5 class=" col light">カートアイテム</h5>
 		</div>
-		<div class="row center">
-			<div class="col">
+		<form action="BuyConfirm" method="post">
+			<div class="row center">
+				<div class="col">
 
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th class="center" style="width: 20%">商品名</th>
-							<th class="center">単価</th>
-							<th class="center" style="width: 20%">小計</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%-- <c:forEach var="cartInItem" items="${cart}">--%>
-						<tr>
-							<td class="center">灰流うらら</td>
-							<td class="center">1000円</td>
-							<td class="center">1000円</td>
-						</tr>
-						<%-- </c:forEach> --%>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="center" style="width: 20%">商品名</th>
+								<th class="center" style="width: 20%">購入数</th>
+								<th class="center">単価</th>
+								<th class="center" style="width: 20%">小計</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="cartInItem" items="${cart}">
+								<tr>
+									<td class="center">${cartInItem.itemName}</td>
+									<td class="center">${cartInItem.countNum}</td>
+									<td class="center">${cartInItem.price}円</td>
+									<td class="center">${cartInItem.subTotal}円</td>
+								</tr>
+							</c:forEach>
 
-					</tbody>
-				</table>
-
-					<button type="button" class="btn btn-primary " name="action">購入確認</button>
-
+						</tbody>
+					</table>
+					<div class="">
+						<button type="submit" class="btn btn-primary " name="action">購入確認</button>
+					</div>
+				</div>
 			</div>
-		</div>
+		</form>
+	</div>
 
 	</div>
 </body>

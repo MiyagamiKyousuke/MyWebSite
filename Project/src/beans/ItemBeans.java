@@ -1,14 +1,29 @@
 package beans;
 
 public class ItemBeans {
+
 	private int id;
+	//商品名
 	private String itemName;
+	//カードの種類
 	private int cardTypeId;
+	//効果
 	private String effect;
+	//値段
 	private int price;
+	//ファイル名
 	private String fileName;
 	private int num;
+	//ランキング
 	private int ranking;
+
+
+	/* 表示用 */
+	//購入数
+	private int countNum;
+
+	//小計
+
 	/**
 	 * @return id
 	 */
@@ -104,5 +119,15 @@ public class ItemBeans {
 	 */
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public int getCountNum() {
+		return countNum;
+	}
+	public void setCountNum(int countNum) {
+		this.countNum = countNum;
+	}
+	//小計
+	public int getSubTotal() {
+		return this.price * this.countNum;
 	}
 }

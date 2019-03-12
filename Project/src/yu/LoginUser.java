@@ -49,11 +49,18 @@ public class LoginUser extends HttpServlet {
 		int userId = UserDAO.findGetUserId(loginId, password);
 
 		if(userId !=0) {
+			session.setAttribute("isLogin", true);
 			session.setAttribute("userId", userId);
-			session.setAttribute("password", password);
-			response.sendRedirect("Index");
-		}else {
+			//response.sendRedirect("Index");
+			//ログイン前のページを取得
+			String returnStrUrl = (String) Help.cutSessionAttribute(session, "returnStrUrl");
 
+			//ログイン前ページにリダイレクト。指定がない場合Index
+			response.sendRedirect(returnStrUrl!=null?returnStrUrl:"Index");
+		}else {
+			session.setAttribute("loginId", loginId);
+			session.setAttribute("loginErrorMessage", "入力内容が正しくありません");
+			response.sendRedirect("LoginUser");
 		}
 
 		}catch (Exception e) {

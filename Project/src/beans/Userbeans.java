@@ -9,6 +9,15 @@ public class Userbeans {
 	private String loginId;
 	private String loginPassword;
 	private Date createDate;
+
+	// コンストラクタ
+	public Userbeans() {
+		this.name = "";
+		this.address = "";
+		this.loginId = "";
+		this.loginPassword = "";
+	}
+
 	/**
 	 * @return id
 	 */
@@ -80,6 +89,21 @@ public class Userbeans {
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+
+	/**
+	 * ユーザー情報更新時の必要情報をまとめてセットするための処理
+	 *
+	 * @param name
+	 * @param loginId
+	 * @param address
+	 */
+	public void setUpdateUserDataBeansInfo(String name, String loginId, String address, int id) {
+		this.name = name;
+		this.loginId = loginId;
+		this.address = address;
+		this.id = id;
 	}
 
 }

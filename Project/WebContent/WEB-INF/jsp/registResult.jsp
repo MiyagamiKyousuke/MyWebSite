@@ -26,25 +26,25 @@
 						<div class="row">
 							<div class="form-group col 10">
 								<label>名前</label> <input type="text" class="form-control"
-									name="user_name" value="aaa" readonly>
+									name="user_name" value="${udb.name}" readonly>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col 10">
 								<label>住所</label> <input type="text" class="form-control"
-									name="user_address" value="千葉県" readonly>
+									name="user_address" value="${udb.address}" readonly>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col 10" >
 								<label>ログインID</label> <input type="text" class="form-control"
-									name="login_id" value="ABCD" readonly>
+									name="login_id" value="${udb.loginId}" readonly>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col 10">
 								<label>ログインID</label> <input type="password"
-									class="form-control" name="password" value="ABCD" readonly>
+									class="form-control" name="password" value="${udb.loginPassword}" readonly>
 							</div>
 						</div>
 						<div class="row">
@@ -55,7 +55,7 @@
 						<div class="row">
 							<div class="col">
 								<p class="text-center">
-									<a href="Login" class="btn btn-primary  col-8">ログイン画面へ</a>
+									<a href="LoginUser" class="btn btn-primary  col-8">ログイン画面へ</a>
 								</p>
 							</div>
 						</div>

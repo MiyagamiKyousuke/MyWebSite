@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,9 @@
 	<div class="container">
 		<div class="row">
 			<h5 class="col text-center">登録確認</h5>
-			<!--<c:if test="${validationMessage != null}">
+			<c:if test="${validationMessage != null}">
 				<P class="red-text">${validationMessage}</P>
-			</c:if>-->
+			</c:if>
 
 		</div>
 		<div class="row">
@@ -23,46 +24,49 @@
 			<div class="col-6 offset-md-3">
 				<div class="card">
 					<div class="card-body">
-						<div class="row">
-							<div class="form-group col-10">
-								<label>名前</label> <input type="text" class="form-control"
-									name="user_name" value="aaa" readonly>
+						<form action="RegistResult" method="POST">
+							<div class="row">
+								<div class="form-group col-10">
+									<label>名前</label> <input type="text" class="form-control"
+										name="user_name" value="${udb.name}" readonly>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-10">
-								<label>住所</label> <input type="text" class="form-control"
-									name="user_address" value="千葉県" readonly>
+							<div class="row">
+								<div class="form-group col-10">
+									<label>住所</label> <input type="text" class="form-control"
+										name="user_address" value="${udb.address}" readonly>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-10" >
-								<label>ログインID</label> <input type="text" class="form-control"
-									name="login_id" value="ABCD" readonly>
+							<div class="row">
+								<div class="form-group col-10">
+									<label>ログインID</label> <input type="text" class="form-control"
+										name="login_id" value="${udb.loginId}" readonly>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-10">
-								<label>ログインID</label> <input type="password"
-									class="form-control" name="password" value="ABCD" readonly>
+							<div class="row">
+								<div class="form-group col-10">
+									<label>パスワード</label> <input type="password"
+										class="form-control" name="password"
+										value="${udb.loginPassword}" readonly>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<p class="text-center">上記内容で登録してよろしいでしょうか?</p>
+							<div class="row">
+								<div class="col">
+									<p class="text-center">上記内容で登録してよろしいでしょうか?</p>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col text-center">
-								<button type="button" class="btn btn-primary"
-									name="confirm_button" value="cancel">修正</button>
-							</div>
-							<div class="col text-center">
-								<button type="submit" class="btn btn-primary"
-									name="confirm_button" value="regist">登録</button>
-							</div>
+							<div class="row">
+								<div class="col text-center">
+									<button type="submit" class="btn btn-primary"
+										name="confirm_button" value="cancel">修正</button>
+								</div>
+								<div class="col text-center">
+									<button type="submit" class="btn btn-primary"
+										name="confirm_button" value="regist">登録</button>
+								</div>
 
-						</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

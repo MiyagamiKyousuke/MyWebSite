@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,21 +22,21 @@
 	crossorigin="anonymous">
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 	<br>
 	<br>
 	<div class="container">
 		<div class="row center">
 			<div class="col center_text">
-				商品を追加しました
+				${cartActionMessage}
 				<h5 class="col">買い物かご</h5>
 			</div>
 		</div>
 		<div class="section">
-			<form action="ItemDelete" method="POST">
+			<form action="ItemDelete" method="post">
 				<div class="row aaa">
 					<div class="col center-block mx-auto center_text">
-						<button type="button" class="btn btn-primary " name="action">
+						<button type="submit" class="btn btn-primary " name="action">
 							削除<i class="fas fa-trash-alt"></i>
 						</button>
 					</div>
@@ -45,25 +46,27 @@
 					</div>
 				</div>
 				<div class="row">
-					<%-- <c:forEach var="item" items="${cart}" varStatus="status">--%>
+					<c:forEach var="items" items="${cart}" varStatus="status">
 						<div class="col_3">
 							<div class="card">
 								<div class="card-image">
-									<a href="Item?item_id=${item.id}"><img
-										src="image/51P7MQPmqLL.jpg"> </a>
+									<a href="Item?item_id=${items.id}"><img
+										src="image/${items.fileName}"> </a>
 								</div>
 								<div class="card-content">
-									<span class="card-title">灰流うらら</span>
-									<p>1000円</p>
+									<span class="card-title">${items.fileName}</span>
+									<p>個数 ${items.countNum}</p>
+									<p>${items.price}円</p>
 									<p>
-										<input type="checkbox" id="${status.index}"
-											name="delete_item_id_list" value="${item.id}" /> <label
-											for="${status.index}">削除</label>
+										<input type="checkbox" id="${items.id}"
+											name="delete_item_id_list" value="${items.id}" /> <label
+											for="${items.id}">削除</label>
 									</p>
 								</div>
 							</div>
 						</div>
-						<%--<c:if test="${(status.index+1) % 4 == 0 }">--%>
+					</c:forEach>
+					<%--<c:if test="${(status.index+1) % 4 == 0 }">--%>
 				</div>
 				<div class="row">
 					<%--</c:if>

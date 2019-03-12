@@ -60,9 +60,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">2019年02月20日10時23分</td>
-									<td class="center">通常配送</td>
-									<td class="center">1300円</td>
+									<td class="center">${resultBDB}buyDate</td>
+									<td class="center">${resultBDB.deliveryMethodName}</td>
+									<td class="center">${resultBDB.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
