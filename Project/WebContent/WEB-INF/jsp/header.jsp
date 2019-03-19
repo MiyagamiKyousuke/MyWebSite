@@ -28,7 +28,7 @@
 						<li><a href="Index"> <i class="fas fa-caret-right green"
 								aria-hidden="true"> </i> HOME
 						</a></li>
-						<li><a href="ItemSearch"> <i
+						<li><a href="ItemSearchResult"> <i
 								class="fas fa-caret-right green" aria-hidden="true"> </i> 検索
 						</a></li>
 						<%if(isLogin){ %>
@@ -40,8 +40,8 @@
 								class="fas fa-caret-right green" aria-hidden="true"> </i> 新規登録
 						</a></li>
 						<%} %>
-						<li><a href="#"> <i class="fas fa-caret-right green"
-								aria-hidden="true"> </i> MAP
+						<li><a href="Cart"> <i class="fas fa-caret-right green"
+								aria-hidden="true"> </i> カート
 						</a></li>
 						<%if(isLogin){ %>
 						<li><a href="Logout"> <i

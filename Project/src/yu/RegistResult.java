@@ -44,10 +44,15 @@ public class RegistResult extends HttpServlet {
 		String inputUserPassword = request.getParameter("password");
 
 		Userbeans udb = new Userbeans();
+		//暗号化
+		String changePass = Help.code(inputUserPassword);
+
+		udb.setName(changePass);
 		udb.setName(inputUserName);
 		udb.setAddress(inputUserAddress);
 		udb.setLoginId(inputUserinputLoginId);
-		udb.setLoginPassword(inputUserPassword);
+		//暗号化後のパスワードをセット
+		udb.setLoginPassword(changePass);
 
 		String check = request.getParameter("confirm_button");
 
@@ -70,6 +75,8 @@ public class RegistResult extends HttpServlet {
 
 		}catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 
 	}

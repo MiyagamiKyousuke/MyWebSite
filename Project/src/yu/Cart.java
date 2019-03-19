@@ -14,51 +14,45 @@ import javax.servlet.http.HttpSession;
 import beans.ItemBeans;
 
 /**
- * Servlet implementation class ItemDelete
+ * Servlet implementation class Cart
  */
-@WebServlet("/ItemDelete")
-public class ItemDelete extends HttpServlet {
+@WebServlet("/Cart")
+public class Cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ItemDelete() {
+    public Cart() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			String[] deleteItemIdList = request.getParameterValues("delete_item_id_list");
 			ArrayList<ItemBeans> cart = (ArrayList<ItemBeans>) session.getAttribute("cart");
+			//セッションにカートがない場合カートを作成
+			if (cart == null) {
+				cart = new ArrayList<ItemBeans>();
+				session.setAttribute("cart", cart);
+			}
 
 			String cartActionMessage = "";
-			if (deleteItemIdList != null) {
-				//削除対象の商品を削除
-				for (String deleteItemId : deleteItemIdList) {
-					for (ItemBeans cartInItem : cart) {
-						if (cartInItem.getId() == Integer.parseInt(deleteItemId)) {
-							cart.remove(cartInItem);
-							break;
-						}
-					}
-				}
-				cartActionMessage = "削除しました";
-			} else {
-				cartActionMessage = "削除する商品が選択されていません";
+			//カートに商品が入っていないなら
+			if(cart.size() == 0) {
+				cartActionMessage = "カートに商品がありません";
 			}
 
 			request.setAttribute("cartActionMessage", cartActionMessage);
 			//フォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemAdd.jsp");
 			dispatcher.forward(request, response);
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
 			response.sendRedirect("Error");

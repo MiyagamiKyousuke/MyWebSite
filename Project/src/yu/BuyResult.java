@@ -44,6 +44,9 @@ public class BuyResult extends HttpServlet {
 			// セッションからカート情報を取得
 			ArrayList<ItemBeans> cart = (ArrayList<ItemBeans>) Help.cutSessionAttribute(session, "cart");
 
+			//セッションから配送情報を取得
+			//DeliveryMethodDataBeans dmdb =(DeliveryMethodDataBeans)session.getAttribute("deliveryPrice");
+
 			BuyDataBeans bdb = (BuyDataBeans) Help.cutSessionAttribute(session, "bdb");
 			//DeliveryMethodDataBeans userSelectDMB = (DeliveryMethodDataBeans)Help.cutSessionAttribute(session, "deliveryPrice");
 			// 購入情報を登録
@@ -65,12 +68,17 @@ public class BuyResult extends HttpServlet {
 			ArrayList<ItemBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
 			request.setAttribute("buyIDBList", buyIDBList);
 
+			//配送情報
+			//request.setAttribute("dmdb", dmdb);
+
 			// 購入完了ページ
 			//フォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/buyResult.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 	}
 

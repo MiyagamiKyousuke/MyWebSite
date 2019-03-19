@@ -71,6 +71,8 @@ public class Index extends HttpServlet {
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 	}
 

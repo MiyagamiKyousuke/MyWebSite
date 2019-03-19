@@ -19,12 +19,11 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<jsp:include page="header.jsp" />
 	<div class="container">
 		<br> <br>
 		<div class="row center">
 			<div class="input-field col s8 offset-s2 ">
-				<form action="WEB-INF/jsp/ItemSearchResult">
+				<form action="ItemSearchResult" method="post">
 					<div class="input-group-prepend">
 						<div class="dropdown">
 							<!-- 切替ボタンの設定 -->
@@ -37,10 +36,10 @@
 
 								<!-- ドロップメニューの設定 -->
 							<select name="cardType" class="btn ">
-								<option value="all">すべて</option>
-								<option value="monster">モンスター</option>
-								<option value="magic">魔法</option>
-								<option value="trap">トラップ</option>
+								<option value="0">すべて</option>
+								<option value="1">モンスター</option>
+								<option value="2">魔法</option>
+								<option value="3">トラップ</option>
 							</select>
 						</div>
 						<input type="text" class="form-control" name="search_word">
@@ -51,7 +50,7 @@
 		<div class="row">
 			<div class="col text-center">
 				<h5>検索結果</h5>
-				<p>検索結果XX件</p>
+				<p>${itemCount}件</p>
 			</div>
 		</div>
 

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.ItemBeans;
 import dao.ItemDAO;
@@ -33,8 +34,28 @@ public class ItemSearchResult extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// リクエストパラメータの文字コードを指定
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		try {
+		ArrayList<ItemBeans> itemSearch = ItemDAO.itemSearch(0,"");
+
+		int itemCount = ItemDAO.getItemCount("",0);
+
+		//リクエストスコープにセット
+		request.setAttribute("itemSearch", itemSearch);
+		request.setAttribute("itemCount", itemCount);
+
+
+		//フォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemsearchresult.jsp");
+		dispatcher.forward(request, response);
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
+		}
 	}
 
 	/**
@@ -42,6 +63,8 @@ public class ItemSearchResult extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
 		// リクエストパラメータの文字コードを指定
 		request.setCharacterEncoding("UTF-8");
 
@@ -53,22 +76,23 @@ public class ItemSearchResult extends HttpServlet {
 
 		try {
 
-		ArrayList<ItemBeans> itemSearch = ItemDAO.itemSearch(searchTypeInteger, searchWord);
+			ArrayList<ItemBeans> itemSearch = ItemDAO.itemSearch(searchTypeInteger, searchWord);
 
-		//リクエストスコープにセット
-		request.setAttribute("itemSearch", itemSearch);
+			int itemCount = ItemDAO.getItemCount(searchWord,searchTypeInteger);
 
-		//フォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemsearchresult.jsp");
-		dispatcher.forward(request, response);
+			//リクエストスコープにセット
+			request.setAttribute("itemSearch", itemSearch);
+			request.setAttribute("itemCount", itemCount);
 
-		}catch(Exception e){
+			//フォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemsearchresult.jsp");
+			dispatcher.forward(request, response);
+
+		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
-
-
-
-
 
 	}
 

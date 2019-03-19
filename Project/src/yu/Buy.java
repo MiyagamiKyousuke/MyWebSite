@@ -41,7 +41,7 @@ public class Buy extends HttpServlet {
 				// Sessionにリターンページ情報を書き込む
 				session.setAttribute("returnStrUrl", "Buy");
 				// Login画面にリダイレクト
-				response.sendRedirect("Login");
+				response.sendRedirect("LoginUser");
 
 			} else if (cart.size() == 0) {
 				request.setAttribute("cartActionMessage", "購入する商品がありません");
@@ -55,6 +55,8 @@ public class Buy extends HttpServlet {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 
 	}

@@ -24,7 +24,7 @@ public class Help {
 
 		//ハッシュ生成処理
 		byte[] bytes;
-		String result =null;
+		String result = null;
 		try {
 			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
 			result = DatatypeConverter.printHexBinary(bytes);
@@ -35,7 +35,6 @@ public class Help {
 
 		//標準出力
 		System.out.println(result);
-
 
 		return result;
 
@@ -65,7 +64,7 @@ public class Help {
 	public static int getTotalItemPrice(ArrayList<ItemBeans> items) {
 		int total = 0;
 		for (ItemBeans item : items) {
-			total += item.getPrice();
+			total += item.getPrice() *item.getCountNum();
 
 		}
 		return total;
@@ -98,6 +97,29 @@ public class Help {
 		}
 
 		return false;
+
+	}
+
+	public static String code(String password) {
+
+		//ハッシュを生成したい元の文字列
+		String source = password;
+		//ハッシュ生成前にバイト配列に置き換える際のCharset
+		Charset charset = StandardCharsets.UTF_8;
+		//ハッシュアルゴリズム
+		String algorithm = "MD5";
+
+		//ハッシュ生成処理
+		byte[] bytes = null;
+		try {
+			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		String result = DatatypeConverter.printHexBinary(bytes);
+		System.out.println(result);
+		return source;
 
 	}
 }

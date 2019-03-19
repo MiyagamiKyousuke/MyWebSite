@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +44,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">2019年02月21日10時25分</td>
-									<td class="center">特急配送</td>
-									<td class="center">39164円</td>
+									<td class="center">${resultBDB.formatDate}</td>
+									<td class="center">${resultBDB.deliveryMethodName}</td>
+									<td class="center">${resultBDB.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -63,16 +64,26 @@
 								<tr>
 									<th class="center">商品</th>
 									<th class="center" style="width: 20%">単価</th>
+									<th class="center" style="width: 20%">個数</th>
+
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">レビューで１年補償 学習机 勉強机 学習デスク まなぶ2(机のみ+デスクカーペットプレゼント)(DTS-315)-ART 学習椅子</td>
-									<td class="center">38664</td>
+									<td class="center">${idb.name}</td>
+									<td class="center">${idb.price}</td>
 								</tr>
+								<c:forEach var="buyIDB" items="${buyIDBList}">
+									<tr>
+										<td class="center">${buyIDB.itemName}</td>
+										<td class="center">${buyIDB.price}円</td>
+										<td class="center">${buyIDB.num}</td>
+									</tr>
+								</c:forEach>
 								<tr>
-									<td class="center">特急配送</td>
-									<td class="center">500</td>
+									<td class="center">${resultBDB.deliveryMethodName}</td>
+									<td class="center">${resultBDB.deliveryMethodPrice}円</td>
+									<td class="center"></td>
 								</tr>
 							</tbody>
 						</table>

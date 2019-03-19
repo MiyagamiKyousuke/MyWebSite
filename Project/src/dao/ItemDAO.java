@@ -87,32 +87,32 @@ public class ItemDAO {
 		try {
 			con = DBManager.getConnection();
 
-//			String sql = "SELECT * FROM item WHERE id > 0 ";
+			//			String sql = "SELECT * FROM item WHERE id > 0 ";
 			String sql = "SELECT * FROM item";
 
 			boolean cardFlag = false;
 			boolean keywordFlag = false;
 
-//			if (card != 0) {
-//				//モンスター、魔法、トラップを種別ＩＤで文字列結合する
-//				sql += "AND card_type_id = ?";
-//				cardFlag = true;
-//
-//			}
-//
-//			if (keyword != "") {
-//				//商品の部分検索を降順で行い文字列結合する
-//				sql += "AND name LIKE ?";
-//				keywordFlag = true;
-//
-//			}
-			if(card != 0 || !keyword.equals("")) {
+			//			if (card != 0) {
+			//				//モンスター、魔法、トラップを種別ＩＤで文字列結合する
+			//				sql += "AND card_type_id = ?";
+			//				cardFlag = true;
+			//
+			//			}
+			//
+			//			if (keyword != "") {
+			//				//商品の部分検索を降順で行い文字列結合する
+			//				sql += "AND name LIKE ?";
+			//				keywordFlag = true;
+			//
+			//			}
+			if (card != 0 || !keyword.equals("")) {
 				sql += " WHERE id > 0";
-				if(card != 0) {
+				if (card != 0) {
 					sql += " AND card_type_id = ?";
 					cardFlag = true;
 				}
-				if(!keyword.equals("")) {
+				if (!keyword.equals("")) {
 					sql += " AND name LIKE ?";
 					keywordFlag = true;
 				}
@@ -130,10 +130,8 @@ public class ItemDAO {
 				st.setString(1, "%" + keyword + "%");
 			}
 
-
 			ResultSet rs = st.executeQuery();
 			ArrayList<ItemBeans> itemList = new ArrayList<ItemBeans>();
-
 
 			while (rs.next()) {
 				ItemBeans item = new ItemBeans();
@@ -158,9 +156,50 @@ public class ItemDAO {
 			}
 		}
 
-
 	}
 
+	/*
+		public static ArrayList<ItemBeans> itemSearch() throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+
+			try {
+				con = DBManager.getConnection();
+
+				st = con.prepareStatement("SELECT * FROM item");
+
+
+				ResultSet rs = st.executeQuery();
+				ArrayList<ItemBeans> itemList = new ArrayList<ItemBeans>();
+				//商品数検索hit件数
+				int count = 0;
+				while (rs.next()) {
+					ItemBeans item = new ItemBeans();
+					item.setId(rs.getInt("id"));
+					item.setItemName(rs.getString("name"));
+					item.setCardTypeId(rs.getInt("card_type_id"));
+					item.setEffect(rs.getString("effect"));
+					item.setPrice(rs.getInt("price"));
+					item.setFileName(rs.getString("file_name"));
+					itemList.add(item);
+				}
+
+
+				System.out.println("searching item by itemID has been completed");
+				return itemList;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+
+
+		}
+	*/
 	/**
 	 * 商品IDによる商品検索
 	 * @param itemId
@@ -191,6 +230,48 @@ public class ItemDAO {
 
 			return item;
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 商品総数を取得
+	 *
+	 * @param searchWord
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int getItemCount(String searchWord, int card) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			String sql = "select count(*) as cnt from item where name like ?";
+			boolean cardFlag = false;
+
+			if(card != 0) {
+				sql += " and card_type_id = ?;";
+				cardFlag = true;
+			}
+			st = con.prepareStatement(sql);
+			st.setString(1, "%" + searchWord + "%");
+
+			if(cardFlag) {
+				st.setInt(1, card);
+			}
+			ResultSet rs = st.executeQuery();
+			int coung = 0;
+			while (rs.next()) {
+				coung = Integer.parseInt(rs.getString("cnt"));
+			}
+			return coung;
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {

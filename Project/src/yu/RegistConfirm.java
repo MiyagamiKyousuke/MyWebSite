@@ -60,9 +60,15 @@ public class RegistConfirm extends HttpServlet {
 			udb.setLoginPassword(inputPassword);
 
 			String validationMessage = "";
+			//空文字チェック
+			if (udb.getName().length() == 0 || udb.getAddress().length() == 0 || udb.getLoginId().length() == 0
+					|| udb.getLoginPassword().length() == 0 || inputConfirmPassword.length() == 0) {
+				validationMessage += "入力必須項目が未入力です";
+				return;
+			}
 
 			// 入力されているパスワードが確認用と等しいか
-			if (!inputPassword.equals(inputConfirmPassword)) {
+			if (!(udb.getLoginPassword()).equals(inputConfirmPassword)) {
 				validationMessage += "入力されているパスワードと確認用パスワードが違います<br>";
 			}
 			// ログインIDの入力規則チェック 英数字 ハイフン アンダースコアのみ入力可能
@@ -77,6 +83,7 @@ public class RegistConfirm extends HttpServlet {
 
 			// バリデーションエラーメッセージがないなら確認画面へ
 			if (validationMessage.length() == 0) {
+
 				request.setAttribute("udb", udb);
 				//フォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registConfirm.jsp");
@@ -88,7 +95,9 @@ public class RegistConfirm extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 	}
 

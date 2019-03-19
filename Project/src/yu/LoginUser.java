@@ -46,7 +46,11 @@ public class LoginUser extends HttpServlet {
 		String loginId = request.getParameter("Username");
 		String password = request.getParameter("Password");
 
-		int userId = UserDAO.findGetUserId(loginId, password);
+		//暗号化
+		String changePass = Help.code(password);
+
+
+		int userId = UserDAO.findGetUserId(loginId, changePass);
 
 		if(userId !=0) {
 			session.setAttribute("isLogin", true);
@@ -64,8 +68,9 @@ public class LoginUser extends HttpServlet {
 		}
 
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 	}
 }

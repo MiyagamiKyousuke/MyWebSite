@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,35 +36,37 @@
 		<div class="row">
 			<div class="section"></div>
 			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="row">
-							<div class="form-group col-10">
-								<label>名前</label> <input type="text" class="form-control"
-									name="user_name" value="aaa">
+				<form action="UserDataUpdateConfirm" method="post">
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="form-group col-10">
+									<label>名前</label> <input type="text" class="form-control"
+										name="user_name" value="${ub.name}">
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-10">
-								<label>ログインID</label> <input type="text" class="form-control"
-									name="login_id" value="ABCD">
+							<div class="row">
+								<div class="form-group col-10">
+									<label>ログインID</label> <input type="text" class="form-control"
+										name="login_id" value="${ub.loginId}">
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-10">
-								<label>住所</label> <input type="text" class="form-control"
-									name="user_address" value="千葉県">
+							<div class="row">
+								<div class="form-group col-10">
+									<label>住所</label> <input type="text" class="form-control"
+										name="user_address" value="${ub.address}">
+								</div>
 							</div>
-						</div>
 
-						<div class="row">
-							<div class="col text-center">
-								<button type="submit" class="btn btn-primary"
-									name="confirm_button" value="regist">更新</button>
+							<div class="row">
+								<div class="col text-center">
+									<button type="submit" class="btn btn-primary"
+										name="confirm_button" value="regist">更新</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 		<div class="row usertable">
@@ -80,17 +83,18 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="uib" items="${uibList}">
 								<tr>
 									<td class="center"><a
 										href="UserBuyHistoryDetail?buy_id=${uib.id}"
 										class="btn btn-primary"> <i
 											class="fas fa-chevron-circle-down"></i></a></td>
-									<th class="center">2019年02月21日10時25分</th>
-									<th class="center">特急配送</th>
-									<th class="center">39164円</th>
+									<th class="center">${uib.formatDate}</th>
+									<th class="center">${uib.delivertMethodName}</th>
+									<th class="center">${uib.totalPrice}円</th>
 								</tr>
+								</c:forEach>
 							</tbody>
-
 						</table>
 					</div>
 				</div>
