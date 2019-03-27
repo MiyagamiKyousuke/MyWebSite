@@ -255,15 +255,17 @@ public class ItemDAO {
 			String sql = "select count(*) as cnt from item where name like ?";
 			boolean cardFlag = false;
 
-			if(card != 0) {
+			if (card != 0) {
 				sql += " and card_type_id = ?;";
 				cardFlag = true;
 			}
+
+			System.out.println(sql);
 			st = con.prepareStatement(sql);
 			st.setString(1, "%" + searchWord + "%");
 
-			if(cardFlag) {
-				st.setInt(1, card);
+			if (cardFlag) {
+				st.setInt(2, card);
 			}
 			ResultSet rs = st.executeQuery();
 			int coung = 0;
@@ -279,6 +281,31 @@ public class ItemDAO {
 				con.close();
 			}
 		}
+	}
+
+	public static void adminInsertItem(String insertName, int chInsertCardType, String insertEffect, int chInsertMoney,
+			String insertFileName) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("INSERT INTO item(name,card_type_id,effect,price,file_name) VALUES(?,?,?,?,?)") ;
+			st.setString(1, insertName);
+			st.setInt(2, chInsertCardType);
+			st.setString(3, insertEffect);
+			st.setInt(4, chInsertMoney);
+			st.setString(5, insertFileName);
+			st.executeUpdate();
+			System.out.println("inserting item has been completed");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
 	}
 
 }

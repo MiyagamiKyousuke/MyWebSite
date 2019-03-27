@@ -42,10 +42,13 @@ public class LoginUser extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
+		boolean adminFlag = false;
 		//パラメーターから取得
 		String loginId = request.getParameter("Username");
 		String password = request.getParameter("Password");
-
+		if(loginId.equals("admin")) {
+			adminFlag = true;
+		}
 		//暗号化
 		String changePass = Help.code(password);
 
@@ -58,7 +61,12 @@ public class LoginUser extends HttpServlet {
 			//response.sendRedirect("Index");
 			//ログイン前のページを取得
 			String returnStrUrl = (String) Help.cutSessionAttribute(session, "returnStrUrl");
-
+			//管理者ユーザーなら管理者画面に遷移
+			if(adminFlag) {
+				//ログイン前ページにリダイレクト。指定がない場合Index
+				response.sendRedirect(returnStrUrl!=null?returnStrUrl:"AdminIndex");
+				return;
+			}
 			//ログイン前ページにリダイレクト。指定がない場合Index
 			response.sendRedirect(returnStrUrl!=null?returnStrUrl:"Index");
 		}else {

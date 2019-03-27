@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import base.DBManager;
 import beans.Userbeans;
@@ -95,6 +96,11 @@ public class UserDAO {
 		return isOverlap;
 	}
 
+	/**
+	 *
+	 * @param ub
+	 * @throws SQLException
+	 */
 	public static void insertUser(Userbeans ub) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -119,6 +125,12 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 *
+	 * @param userId
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Userbeans getUserDataBeansByUserId(int userId) throws SQLException {
 		Userbeans ub = new Userbeans();
 		Connection con = null;
@@ -196,6 +208,41 @@ public class UserDAO {
 				con.close();
 			}
 		}
+
+	}
+
+	public static ArrayList<Userbeans> usertListFind() throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			// SELECT文を準備
+			// SELECTを実行し、結果表を取得
+			st = con.prepareStatement("SELECT * FROM user");
+
+			ResultSet rs = st.executeQuery();
+
+			ArrayList<Userbeans> userList = new ArrayList<Userbeans>();
+
+			while (rs.next()) {
+				Userbeans user = new Userbeans();
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setAddress(rs.getString("address"));
+				user.setLoginId(rs.getString("login_id"));
+				user.setLoginPassword(rs.getString("login_passwprd"));
+				userList.add(user);
+			}
+			return userList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
 
 	}
 

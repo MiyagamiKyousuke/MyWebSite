@@ -63,8 +63,7 @@ public class RegistConfirm extends HttpServlet {
 			//空文字チェック
 			if (udb.getName().length() == 0 || udb.getAddress().length() == 0 || udb.getLoginId().length() == 0
 					|| udb.getLoginPassword().length() == 0 || inputConfirmPassword.length() == 0) {
-				validationMessage += "入力必須項目が未入力です";
-				return;
+				validationMessage += "入力必須項目が未入力です<br>";
 			}
 
 			// 入力されているパスワードが確認用と等しいか
@@ -73,7 +72,7 @@ public class RegistConfirm extends HttpServlet {
 			}
 			// ログインIDの入力規則チェック 英数字 ハイフン アンダースコアのみ入力可能
 			if (!Help.isLoginIdValidation(udb.getLoginId())) {
-				validationMessage += "半角英数とハイフン、アンダースコアのみ入力できます";
+				validationMessage += "半角英数とハイフン、アンダースコアのみ入力できます<br>";
 			}
 
 			// loginIdの重複をチェック

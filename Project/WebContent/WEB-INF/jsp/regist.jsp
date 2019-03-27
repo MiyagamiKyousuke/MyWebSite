@@ -15,7 +15,9 @@
 	integrity="sha384-xl26xwG2NVtJDw2/96Lmg09++ZjrXPc89j0j7JHjLOdSwHDHPHiucUjfllW0Ywrq"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="buyResult.css">
+<!--  <link rel="stylesheet" href="buyResult.css">-->
+<link rel="stylesheet" href="regist.css">
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"

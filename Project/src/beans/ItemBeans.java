@@ -1,5 +1,7 @@
 package beans;
 
+import javax.servlet.http.Part;
+
 public class ItemBeans {
 
 	private int id;
@@ -16,6 +18,8 @@ public class ItemBeans {
 	private int num;
 	//ランキング
 	private int ranking;
+	//ファイル
+	private Part file;
 
 
 	/* 表示用 */
@@ -129,5 +133,11 @@ public class ItemBeans {
 	//小計
 	public int getSubTotal() {
 		return this.price * this.countNum;
+	}
+	public Part getFile() {
+		return file;
+	}
+	public void setFile(Part file) {
+		this.file = file;
 	}
 }
