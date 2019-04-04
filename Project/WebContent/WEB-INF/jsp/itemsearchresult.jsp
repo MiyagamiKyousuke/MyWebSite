@@ -15,7 +15,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/regist.css">
+<link rel="stylesheet" href="CSS/itemsearchresurt.css">
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -60,10 +60,10 @@
 
 				<c:forEach var="item" items="${itemSearch}" varStatus="status">
 					<div class="col-3">
-						<div class="card mb-3 shadow-sm">
+						<div class="card mb-3 shadow-sm searchCard">
 							<a href="ItemDetail?item_id=${item.id}"><img src="image/${item.fileName}"></a>
 							<div class="card-body">
-								<p class="card-text">${item.price}円</p>
+								<p class="card-text">${item.stPrice}円</p>
 								<div class="d-flex justify-content-between align-items-center">
 								</div>
 							</div>

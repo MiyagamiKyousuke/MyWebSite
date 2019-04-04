@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import base.DBManager;
+import beans.CardTypeBeans;
 import beans.ItemBeans;
 
 public class ItemDAO {
@@ -34,6 +35,7 @@ public class ItemDAO {
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
 				item.setNum(rs.getInt("number"));
+				//item.setStPrice(item.getStPrice());
 				itemList.add(item);
 			}
 			System.out.println("getItemRanking completed");
@@ -65,6 +67,7 @@ public class ItemDAO {
 				item.setCardTypeId(rs.getInt("card_type_id"));
 				item.setEffect(rs.getString("effect"));
 				item.setPrice(rs.getInt("price"));
+				//item.setStPrice(item.getStPrice());
 				item.setFileName(rs.getString("file_name"));
 			}
 			System.out.println("searching item by itemID has been completed");
@@ -140,6 +143,7 @@ public class ItemDAO {
 				item.setCardTypeId(rs.getInt("card_type_id"));
 				item.setEffect(rs.getString("effect"));
 				item.setPrice(rs.getInt("price"));
+				//item.setStPrice(item.getStPrice());
 				item.setFileName(rs.getString("file_name"));
 				itemList.add(item);
 			}
@@ -223,6 +227,7 @@ public class ItemDAO {
 				item.setItemName(rs.getString("name"));
 				item.setEffect(rs.getString("effect"));
 				item.setPrice(rs.getInt("price"));
+				item.setStPrice(item.getStPrice());
 				item.setFileName(rs.getString("file_name"));
 			}
 
@@ -289,7 +294,7 @@ public class ItemDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO item(name,card_type_id,effect,price,file_name) VALUES(?,?,?,?,?)") ;
+			st = con.prepareStatement("INSERT INTO item(name,card_type_id,effect,price,file_name) VALUES(?,?,?,?,?)");
 			st.setString(1, insertName);
 			st.setInt(2, chInsertCardType);
 			st.setString(3, insertEffect);
@@ -297,6 +302,39 @@ public class ItemDAO {
 			st.setString(5, insertFileName);
 			st.executeUpdate();
 			System.out.println("inserting item has been completed");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+	}
+
+	/**
+	 * (移動予定)
+	 * @param cardId
+	 * @return
+	 * @throws SQLException
+	 */
+	public static CardTypeBeans ctbFind(int cardId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			//sqlをセット
+			st = con.prepareStatement("SELECT * FROM card_type WHERE id = ?");
+			st.setInt(1, cardId);
+			//sql実行
+			ResultSet rs = st.executeQuery();
+			CardTypeBeans ctb = new CardTypeBeans();
+			if (rs.next()) {
+				ctb.setId(rs.getInt("id"));
+				ctb.setCard("types");
+			}
+			return ctb;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

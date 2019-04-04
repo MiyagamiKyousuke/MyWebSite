@@ -77,7 +77,7 @@
 						<th scope="col"><a href="ItemDetail?item_id=${item.id}" class="text-center"><img
 								class="cardRanking" src="image/${item.fileName}"></a></th>
 						<th scope="col">${item.itemName}</th>
-						<th scope="col">${item.price}円</th>
+						<th scope="col">${item.stPrice}円</th>
 					</tr>
 
 					</c:forEach>

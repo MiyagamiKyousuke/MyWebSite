@@ -42,9 +42,9 @@
 							<c:forEach var="cartInItem" items="${cart}">
 								<tr>
 									<td class="center">${cartInItem.itemName}</td>
-									<td class="center">${cartInItem.price}円</td>
+									<td class="center">${cartInItem.stPrice}円</td>
 									<td class="center">${cartInItem.countNum}</td>
-									<td class="center">${cartInItem.subTotal}円</td>
+									<td class="center">${cartInItem.stSubTotal}円</td>
 								</tr>
 							</c:forEach>
 							<tr>
@@ -58,7 +58,7 @@
 								<td class="center">合計</td>
 								<td class="center"></td>
 								<td class="center"></td>
-								<td class="center">${bdb.totalPrice}円</td>
+								<td class="center">${bdb.stTotalPrice}円</td>
 							</tr>
 						</tbody>
 					</table>

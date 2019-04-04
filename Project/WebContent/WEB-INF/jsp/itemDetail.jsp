@@ -53,7 +53,7 @@
 						<div class="ca">
 							<h4>${item.itemName}</h4>
 						</div>
-						<h5>${item.price}円</h5>
+						<h5>${item.stPrice}円</h5>
 						<p>${item.effect}</p>
 					</div>
 					<!--  <div class="row">-->

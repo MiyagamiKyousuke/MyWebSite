@@ -48,8 +48,8 @@
 								<tr>
 									<td class="center">${cartInItem.itemName}</td>
 									<td class="center">${cartInItem.countNum}</td>
-									<td class="center">${cartInItem.price}円</td>
-									<td class="center">${cartInItem.subTotal}円</td>
+									<td class="center">${cartInItem.stPrice}円</td>
+									<td class="center">${cartInItem.stSubTotal}円</td>
 								</tr>
 							</c:forEach>
 

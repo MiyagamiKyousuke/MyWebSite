@@ -20,6 +20,8 @@ public class ItemBeans {
 	private int ranking;
 	//ファイル
 	private Part file;
+	//,付き値段
+	private String stPrice;
 
 
 	/* 表示用 */
@@ -134,10 +136,22 @@ public class ItemBeans {
 	public int getSubTotal() {
 		return this.price * this.countNum;
 	}
+	public String getStSubTotal() {
+		return String.format("%,d", getSubTotal());
+	}
 	public Part getFile() {
 		return file;
 	}
 	public void setFile(Part file) {
 		this.file = file;
 	}
+	public String getStPrice() {
+
+		return String.format("%,d", this.price);
+	}
+	public void setStPrice(String stPrice) {
+		this.stPrice = stPrice;
+	}
+
+
 }

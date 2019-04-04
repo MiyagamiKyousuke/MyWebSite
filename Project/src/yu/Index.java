@@ -75,7 +75,6 @@ public class Index extends HttpServlet {
 			response.sendRedirect("Error");
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

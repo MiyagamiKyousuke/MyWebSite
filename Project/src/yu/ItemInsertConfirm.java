@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import beans.CardTypeBeans;
 import beans.ItemBeans;
+import dao.ItemDAO;
 
 /**
  * Servlet implementation class ItemInsertConfirm
@@ -59,23 +61,31 @@ public class ItemInsertConfirm extends HttpServlet {
 		Part inserimgFile =request.getPart("imgFile");
 
 
-		inserimgFile.write(insertFileName);
+
 
 
 		ItemBeans insertItem = new ItemBeans();
-		insertItem.setItemName(insertName);
-		insertItem.setCardTypeId(chInsertCardType);
-		insertItem.setEffect(insertEffect);
-		insertItem.setPrice(chInsertMoney);
-		insertItem.setFile(inserimgFile);
-		insertItem.setFileName(insertFileName);
 
 //		if(!insertMoney.matches("[0-9]")) {
 //			validationMessage += "半角数字のみ入力できます";
 //		}
 
 		if(validationMessage.length() == 0) {
-			
+			insertItem.setItemName(insertName);
+			insertItem.setCardTypeId(chInsertCardType);
+			insertItem.setEffect(insertEffect);
+			insertItem.setPrice(chInsertMoney);
+			insertItem.setFile(inserimgFile);
+			insertItem.setFileName(insertFileName);
+
+			//カード種別を取得
+			CardTypeBeans cardType = ItemDAO.ctbFind(chInsertCardType);
+			//
+			ItemDAO.adminInsertItem(insertName, chInsertCardType, insertEffect, chInsertMoney, insertFileName);
+			//ファイルをアップロード
+			inserimgFile.write(insertFileName);
+			//リクエストスコープにセット
+			request.setAttribute("cardType",cardType);
 			request.setAttribute("insertItem",insertItem);
 			//フォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemInsertConfirm.jsp");

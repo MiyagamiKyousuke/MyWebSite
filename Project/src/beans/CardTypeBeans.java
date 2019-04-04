@@ -2,6 +2,7 @@ package beans;
 
 public class CardTypeBeans {
 	private int id;
+	//カード種別
 	private String card;
 	public int getId() {
 		return id;

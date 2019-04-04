@@ -56,7 +56,7 @@
 								<div class="card-content">
 									<span class="card-title">${items.fileName}</span>
 									<p>個数 ${items.countNum}</p>
-									<p>${items.price}円</p>
+									<p>${items.stPrice}円</p>
 									<p>
 										<input type="checkbox" id="${items.id}"
 											name="delete_item_id_list" value="${items.id}" /> <label

@@ -91,7 +91,7 @@
 											class="fas fa-chevron-circle-down"></i></a></td>
 									<th class="center">${uib.formatDate}</th>
 									<th class="center">${uib.delivertMethodName}</th>
-									<th class="center">${uib.totalPrice}円</th>
+									<th class="center">${uib.stTotalPrice}円</th>
 								</tr>
 								</c:forEach>
 							</tbody>

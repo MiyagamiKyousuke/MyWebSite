@@ -43,7 +43,9 @@ public class BuyDataBeans  implements Serializable {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
+	public String getStTotalPrice() {
+		return String.format("%,d", getTotalPrice());
+	}
 
 	public int getDelivertMethodId() {
 		return delivertMethodId;

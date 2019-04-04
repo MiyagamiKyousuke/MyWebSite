@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
-img{
-	width: 252px;
+.searchCard img{
+	width: 253px;
+	height: 300px;
 }

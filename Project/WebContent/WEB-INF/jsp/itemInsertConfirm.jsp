@@ -51,20 +51,20 @@
 							<div class="row">
 								<div class="form-group col-10">
 									<label>カード種別</label> <input type="text" class="form-control"
-										name="user_address" value="${insertItem.address}" readonly>
+										name="user_address" value="${cardType.card}" readonly>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-10">
 									<label>値段</label> <input type="text" class="form-control"
-										name="login_id" value="${insertItem.price}" readonly>
+										name="login_id" value="${insertItem.stPrice}" readonly>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-10">
-									<label>画像名</label> <input type="password"
+									<label>画像名</label> <input type="text"
 										class="form-control" name="password"
-										value="${insertItem.file}" readonly>
+										value="${insertItem.fileName}" readonly>
 								</div>
 							</div>
 							<div class="row">
