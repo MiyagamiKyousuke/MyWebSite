@@ -49,7 +49,12 @@ public class ItemDAO {
 			}
 		}
 	}
-
+	/**
+	 * 1つの商品を抽出
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ItemBeans itemDetailPrint(int id) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -69,6 +74,7 @@ public class ItemDAO {
 				item.setPrice(rs.getInt("price"));
 				//item.setStPrice(item.getStPrice());
 				item.setFileName(rs.getString("file_name"));
+				item.setStock(rs.getInt("stock"));
 			}
 			System.out.println("searching item by itemID has been completed");
 			return item;
@@ -82,7 +88,13 @@ public class ItemDAO {
 		}
 
 	}
-
+	/**
+	 *
+	 * @param card
+	 * @param keyword
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<ItemBeans> itemSearch(int card, String keyword) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -225,10 +237,12 @@ public class ItemDAO {
 			if (rs.next()) {
 				item.setId(rs.getInt("id"));
 				item.setItemName(rs.getString("name"));
+				item.setCardTypeId(rs.getInt("card_type_id"));
 				item.setEffect(rs.getString("effect"));
 				item.setPrice(rs.getInt("price"));
 				item.setStPrice(item.getStPrice());
 				item.setFileName(rs.getString("file_name"));
+				item.setStock(rs.getInt("stock"));
 			}
 
 			System.out.println("searching item by itemID has been completed");
@@ -287,7 +301,15 @@ public class ItemDAO {
 			}
 		}
 	}
-
+	/**
+	 * 新規商品の登録
+	 * @param insertName
+	 * @param chInsertCardType
+	 * @param insertEffect
+	 * @param chInsertMoney
+	 * @param insertFileName
+	 * @throws SQLException
+	 */
 	public static void adminInsertItem(String insertName, int chInsertCardType, String insertEffect, int chInsertMoney,
 			String insertFileName) throws SQLException {
 		Connection con = null;
@@ -336,6 +358,79 @@ public class ItemDAO {
 			}
 			return ctb;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+	}
+	/**
+	 *	商品全件取得
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<ItemBeans> itemFindAll() throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			//sqlをセット
+			st = con.prepareStatement("SELECT item.id, item.name, item.card_type_id, item.effect, item.price, item.file_name, item.stock, card_type.types FROM item INNER JOIN card_type ON item.card_type_id = card_type.id;;");
+			//SQLを取得
+			ResultSet rs = st.executeQuery();
+
+
+			ArrayList<ItemBeans> itemList = new ArrayList<ItemBeans>();
+			while(rs.next()) {
+				ItemBeans item = new ItemBeans();
+				item.setId(rs.getInt("item.id"));
+				item.setItemName(rs.getString("item.name"));
+				item.setCardTypeId(rs.getInt("item.card_type_id"));
+				item.setEffect(rs.getString("item.effect"));
+				item.setPrice(rs.getInt("item.price"));
+				item.setStPrice(item.getStPrice());
+				item.setFileName(rs.getString("item.file_name"));
+				item.setStock(rs.getInt("item.stock"));
+				item.setCardTypeName(rs.getString("card_type.types"));
+				itemList.add(item);
+			}
+
+
+			return itemList;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 商品在庫更新
+	 * @param id
+	 * @param stock
+	 * @throws SQLException
+	 */
+	public static void itemStockUpdate(int id, int stock) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			//sqlをセット
+			st = con.prepareStatement("UPDATE item SET stock = ? WHERE id = ?");
+			st.setInt(1, stock);
+			st.setInt(2, id);
+			//SQLを実行
+			st.executeUpdate();
+
+			System.out.println("update stock byId");
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {

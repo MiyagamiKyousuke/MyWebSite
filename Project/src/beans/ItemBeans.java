@@ -7,7 +7,7 @@ public class ItemBeans {
 	private int id;
 	//商品名
 	private String itemName;
-	//カードの種類
+	//カードの種類のID
 	private int cardTypeId;
 	//効果
 	private String effect;
@@ -22,6 +22,10 @@ public class ItemBeans {
 	private Part file;
 	//,付き値段
 	private String stPrice;
+	//在庫
+	private int stock;
+	//カード種別名
+	private String cardTypeName;
 
 
 	/* 表示用 */
@@ -151,6 +155,18 @@ public class ItemBeans {
 	}
 	public void setStPrice(String stPrice) {
 		this.stPrice = stPrice;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getCardTypeName() {
+		return cardTypeName;
+	}
+	public void setCardTypeName(String cardTypeName) {
+		this.cardTypeName = cardTypeName;
 	}
 
 

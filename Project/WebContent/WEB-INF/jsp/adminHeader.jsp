@@ -38,7 +38,7 @@
 		<div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
       <a class="p-2 text-muted " href="ItemInsert">商品追加</a>
-      <a class="p-2 text-muted" href="#">商品削除</a>
+      <a class="p-2 text-muted" href="AdminStockInsert">在庫追加</a>
     </nav>
   </div>
 	</div>

@@ -37,12 +37,26 @@ public class ItemAdd extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
+			String cartActionMessage = "";
 			//選択された商品のIDを型変換し利用
 			int id = Integer.parseInt(request.getParameter("item_id"));
 			//選択された購入数を型変換し利用
 			int num = Integer.parseInt(request.getParameter("numAdd"));
 			//対象のアイテム情報を取得
 			ItemBeans items = ItemDAO.getItemByItemID(id);
+
+			//在庫数の確認(追加実装)
+			if((items.getStock() - num) < 0) {
+				cartActionMessage = "在庫が足りません！";
+				request.setAttribute("cartActionMessage", cartActionMessage);
+				request.setAttribute("item", items);
+				//フォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemDetail.jsp");
+				dispatcher.forward(request, response);
+				return;
+
+			}
+
 			//購入数をItemBeansにセット
 			items.setCountNum(num);
 

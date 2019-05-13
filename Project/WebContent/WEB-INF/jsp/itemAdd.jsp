@@ -54,7 +54,7 @@
 										src="image/${items.fileName}"> </a>
 								</div>
 								<div class="card-content">
-									<span class="card-title">${items.fileName}</span>
+									<span class="card-title">${items.itemName}</span>
 									<p>個数 ${items.countNum}</p>
 									<p>${items.stPrice}円</p>
 									<p>

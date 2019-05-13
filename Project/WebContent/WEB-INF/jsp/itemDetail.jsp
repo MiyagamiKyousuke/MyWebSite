@@ -31,6 +31,7 @@
 				<div class="row center">
 					<div class="col"></div>
 					<div class="col">
+						<p>${cartActionMessage}<p/>
 						<h5 class=" col light">商品詳細</h5>
 					</div>
 					<div class="col">
@@ -57,7 +58,7 @@
 						<p>${item.effect}</p>
 					</div>
 					<!--  <div class="row">-->
-					<div class="col-2">
+					<div class="col-1">
 						<p>購入数</p>
 						<div class="dropdown">
 							<!-- 切替ボタンの設定 -->
@@ -75,6 +76,10 @@
 								<option value="3">3</option>
 							</select>
 						</div>
+					</div>
+					<div class="col-1">
+					<p>在庫数</p>
+					<p>${item.stock}</p>
 					</div>
 				</div>
 			</form>
